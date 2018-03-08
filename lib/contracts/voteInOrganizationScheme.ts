@@ -59,7 +59,8 @@ export class VoteInOrganizationSchemeWrapper extends ExtendTruffleContract {
   }
 
   public async setParams(params: StandardSchemeParams): Promise<ArcTransactionDataResult<Hash>> {
-    return super.setParams(
+    return super._setParams(
+      ["bytes32", "address"],
       params.voteParametersHash,
       params.votingMachine
     );

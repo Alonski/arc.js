@@ -1,5 +1,4 @@
 "use strict";
-import { AbsoluteVoteParams } from "contracts/absoluteVote";
 import { Hash } from "../../commonTypes";
 import ContractWrapperFactory from "../../ContractWrapperFactory";
 import { ArcTransactionDataResult, ExtendTruffleContract } from "../../ExtendTruffleContract";
@@ -14,7 +13,7 @@ export class TestWrapperWrapper extends ExtendTruffleContract {
     return "abc";
   }
 
-  public async setParams(params: AbsoluteVoteParams): Promise<ArcTransactionDataResult<Hash>> {
+  public async setParams(params: any): Promise<ArcTransactionDataResult<Hash>> {
     params = Object.assign({},
       {
         ownerVote: true,
@@ -23,7 +22,8 @@ export class TestWrapperWrapper extends ExtendTruffleContract {
       },
       params);
 
-    return super.setParams(
+    return super._setParams(
+      ["address", "uint", "bool"],
       params.reputation,
       params.votePerc,
       params.ownerVote
